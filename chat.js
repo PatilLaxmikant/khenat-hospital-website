@@ -39,7 +39,15 @@ const chatQuestions = [
 
 function toggleChat() {
     chatState.isOpen = !chatState.isOpen;
-    document.getElementById('chat-window').classList.toggle('active', chatState.isOpen);
+    const windowEl = document.getElementById('chat-window');
+
+    if (chatState.isOpen) {
+        windowEl.classList.remove('translate-y-10', 'opacity-0', 'pointer-events-none');
+        windowEl.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+    } else {
+        windowEl.classList.add('translate-y-10', 'opacity-0', 'pointer-events-none');
+        windowEl.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+    }
     if (chatState.isOpen && document.getElementById('chat-messages').children.length === 0) {
         // Start conversation if empty
         setTimeout(() => botReply(chatQuestions[0]), 500);
