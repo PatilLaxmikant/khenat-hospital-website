@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="utf-8" />
@@ -7,188 +7,372 @@
     <title>Khenat Hospital, Karvenagar Pune | Clinic & Maternity Care</title>
     <meta name="description"
         content="Khenat Hospital, Karvenagar Pune — OPD consultations, gynecology, orthopedics and diagnostic support. Call 020-25448451 for appointments." />
-    <link rel="stylesheet" href="styles.css" />
 
-    <!-- Basic LocalBusiness schema (edit if you want to add email/website/social) -->
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        body: ['"Inter"', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            DEFAULT: '#0077b6',
+                            dark: '#023e8a',
+                            light: '#caf0f8',
+                        },
+                        accent: {
+                            DEFAULT: '#00b4d8',
+                            glow: 'rgba(0, 180, 216, 0.4)',
+                        },
+                        surface: {
+                            DEFAULT: '#ffffff',
+                            alt: '#f8faff',
+                        },
+                        text: {
+                            DEFAULT: '#1e293b',
+                            muted: '#64748b',
+                            light: '#94a3b8',
+                        }
+                    },
+                    boxShadow: {
+                        'glow': '0 0 20px rgba(0, 180, 216, 0.4)',
+                        'card': '0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Animations not in Tailwind by default */
+        @keyframes pulse-glow {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 180, 216, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 8px rgba(0, 180, 216, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 180, 216, 0);
+            }
+        }
+
+        .animate-pulse-glow {
+            animation: pulse-glow 2s infinite;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Mobile Menu Animation */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-slide-down {
+            animation: slideDown 0.3s ease-out forwards;
+        }
+    </style>
+
+    <!-- Basic LocalBusiness schema -->
     <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Hospital",
-    "name":"Khenat Hospital",
-    "address":{
-      "@type":"PostalAddress",
-      "streetAddress":"Survey No.53, Sai Housing Society, Karve Nagar Rd, State Bank Nagar, Sramik Vasahat, Karvenagar",
-      "addressLocality":"Pune",
-      "addressRegion":"Maharashtra",
-      "postalCode":"411052",
-      "addressCountry":"IN"
-    },
-    "telephone":["020-25448451","+91 9823425152"],
-    "areaServed":"Pune"
-  }
-  </script>
+    {
+      "@context":"https://schema.org",
+      "@type":"Hospital",
+      "name":"Khenat Hospital",
+      "address":{
+        "@type":"PostalAddress",
+        "streetAddress":"Survey No.53, Sai Housing Society, Karve Nagar Rd, State Bank Nagar, Sramik Vasahat, Karvenagar",
+        "addressLocality":"Pune",
+        "addressRegion":"Maharashtra",
+        "postalCode":"411052",
+        "addressCountry":"IN"
+      },
+      "telephone":["020-25448451","+91 9823425152"],
+      "areaServed":"Pune"
+    }
+    </script>
 </head>
 
-<body>
-    <header class="nav">
-        <div class="container nav-inner">
-            <a class="brand" href="#home">
-                <span class="brand-mark" aria-hidden="true">+</span>
-                <div class="brand-text">
-                    <b>Khenat Hospital</b>
-                    <span>Karvenagar, Pune</span>
+<body class="bg-surface-alt font-sans text-text antialiased selection:bg-primary-light selection:text-primary-dark">
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-50 glass border-b border-slate-200">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center max-w-7xl">
+            <a class="flex items-center gap-3 group" href="#home">
+                <div
+                    class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent text-white grid place-items-center font-bold text-xl shadow-lg ring-1 ring-white/20 group-hover:scale-105 transition-transform duration-300">
+                    +
+                </div>
+                <div class="flex flex-col">
+                    <b class="text-primary-dark text-lg leading-tight">Khenat Hospital</b>
+                    <span class="text-text-muted text-sm">Karvenagar, Pune</span>
                 </div>
             </a>
 
-            <nav class="links" id="menu">
-                <a href="#services">Services</a>
-                <a href="#doctors">Doctors</a>
-                <a href="#appointment">Appointment</a>
-                <a href="#contact">Contact</a>
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center gap-1 bg-white/50 p-1.5 rounded-full border border-slate-200"
+                id="menu">
+                <a href="#services"
+                    class="px-5 py-2 rounded-full text-sm font-semibold text-text-muted hover:bg-white hover:text-primary hover:shadow-sm transition-all">Services</a>
+                <a href="#doctors"
+                    class="px-5 py-2 rounded-full text-sm font-semibold text-text-muted hover:bg-white hover:text-primary hover:shadow-sm transition-all">Doctors</a>
+                <a href="#appointment"
+                    class="px-5 py-2 rounded-full text-sm font-semibold text-text-muted hover:bg-white hover:text-primary hover:shadow-sm transition-all">Appointment</a>
+                <a href="#contact"
+                    class="px-5 py-2 rounded-full text-sm font-semibold text-text-muted hover:bg-white hover:text-primary hover:shadow-sm transition-all">Contact</a>
             </nav>
 
-            <button class="menu-btn" aria-label="Open menu" onclick="toggleMenu()">Menu</button>
-            <a class="cta" href="tel:+912025448451">Call Now</a>
+            <div class="flex items-center gap-3">
+                <button class="md:hidden p-2 text-primary font-bold" aria-label="Open menu"
+                    onclick="toggleMenu()">Menu</button>
+                <a class="hidden md:inline-flex bg-primary-dark text-white px-6 py-2.5 rounded-full font-bold shadow-lg shadow-blue-900/20 hover:-translate-y-0.5 hover:shadow-blue-900/30 transition-all duration-300"
+                    href="tel:+912025448451">Call Now</a>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu"
+            class="hidden absolute top-full left-0 right-0 bg-white border-b border-slate-200 p-4 shadow-xl flex-col gap-2 md:hidden">
+            <a href="#services"
+                class="block text-center py-3 bg-slate-50 rounded-lg border border-slate-100 font-medium text-text-muted"
+                onclick="toggleMenu()">Services</a>
+            <a href="#doctors"
+                class="block text-center py-3 bg-slate-50 rounded-lg border border-slate-100 font-medium text-text-muted"
+                onclick="toggleMenu()">Doctors</a>
+            <a href="#appointment"
+                class="block text-center py-3 bg-slate-50 rounded-lg border border-slate-100 font-medium text-text-muted"
+                onclick="toggleMenu()">Appointment</a>
+            <a href="#contact"
+                class="block text-center py-3 bg-slate-50 rounded-lg border border-slate-100 font-medium text-text-muted"
+                onclick="toggleMenu()">Contact</a>
         </div>
     </header>
 
     <main id="home">
         <!-- HERO -->
-        <section class="hero">
-            <div class="container hero-grid">
-                <div class="hero-left">
-                    <div class="pill">
-                        <span class="dot"></span>
-                        <span>Trusted local care • Karvenagar, Pune 411052</span>
+        <section class="py-6 md:py-12 overflow-hidden relative">
+            <!-- Background Decorations -->
+            <div class="absolute -top-[20%] -left-[10%] w-[800px] h-[800px] bg-accent/5 rounded-full blur-3xl -z-10">
+            </div>
+            <div class="absolute top-[20%] -right-[10%] w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl -z-10">
+            </div>
+
+            <div class="container mx-auto px-4 max-w-7xl grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="flex flex-col items-center md:items-start text-center md:text-left">
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 bg-primary-light/50 text-primary-dark rounded-full border border-primary-light mb-6">
+                        <span class="w-2 h-2 bg-accent rounded-full animate-pulse-glow"></span>
+                        <span class="text-sm font-semibold">Trusted local care • Karvenagar, Pune 411052</span>
                     </div>
 
-                    <h1>Care that feels personal, backed by clinical experience.</h1>
-                    <p class="sub">
+                    <h1
+                        class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 bg-gradient-to-br from-primary-dark to-primary bg-clip-text text-transparent leading-tight">
+                        Care that feels personal, backed by clinical experience.
+                    </h1>
+                    <p class="text-lg md:text-xl text-text-muted mb-10 max-w-xl leading-relaxed">
                         OPD consultations, women’s health support, orthopedic care, and diagnostic guidance —
                         with a focus on clear communication and patient comfort.
                     </p>
 
-                    <div class="hero-actions">
-                        <a class="btn primary" href="#appointment">Book Appointment</a>
-                        <a class="btn ghost" href="https://maps.app.goo.gl/Nfqf4wJDwEgNczU47" target="_blank">Get
-                            Directions</a>
+                    <div class="flex flex-col md:flex-row gap-4 w-full md:w-auto mb-12">
+                        <a class="inline-flex justify-center items-center px-8 py-3.5 bg-gradient-to-br from-primary to-primary-dark text-white font-semibold rounded-2xl shadow-lg shadow-primary/20 hover:-translate-y-0.5 hover:shadow-primary/30 transition-all duration-300 w-full md:w-auto"
+                            href="#appointment">Book Appointment</a>
+                        <a class="inline-flex justify-center items-center px-8 py-3.5 bg-white text-primary-dark font-semibold rounded-2xl border border-slate-200 hover:bg-slate-50 hover:border-primary transition-all duration-300 w-full md:w-auto"
+                            href="https://maps.app.goo.gl/Nfqf4wJDwEgNczU47" target="_blank">Get Directions</a>
                     </div>
 
-                    <div class="kpis">
-                        <div class="kpi">
-                            <b>OPD Support</b>
-                            <span>Consultations & follow-ups</span>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full border-t border-slate-200 pt-8">
+                        <div
+                            class="p-4 bg-white rounded-2xl border border-slate-100 shadow-sm text-center md:text-left">
+                            <b class="block text-primary-dark text-lg mb-1">OPD Support</b>
+                            <span class="text-text-muted text-sm">Consultations & follow-ups</span>
                         </div>
-                        <div class="kpi">
-                            <b>Women’s Health</b>
-                            <span>Gynecology & maternity care</span>
+                        <div
+                            class="p-4 bg-white rounded-2xl border border-slate-100 shadow-sm text-center md:text-left">
+                            <b class="block text-primary-dark text-lg mb-1">Women’s Health</b>
+                            <span class="text-text-muted text-sm">Gynecology & maternity</span>
                         </div>
-                        <div class="kpi">
-                            <b>Diagnostics</b>
-                            <span>Testing & reports guidance</span>
+                        <div
+                            class="p-4 bg-white rounded-2xl border border-slate-100 shadow-sm text-center md:text-left">
+                            <b class="block text-primary-dark text-lg mb-1">Diagnostics</b>
+                            <span class="text-text-muted text-sm">Testing & reports</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="hero-card">
-                    <div class="hero-card-top">
-                        <div class="icon-ring" aria-hidden="true">🩺</div>
+                <div
+                    class="bg-white rounded-[2rem] border border-slate-200 shadow-card overflow-hidden relative group hover:shadow-2xl transition-all duration-500">
+                    <!-- Glass overlay -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-tr from-white/80 via-transparent to-transparent opacity-50 pointer-events-none">
+                    </div>
+
+                    <div class="p-6 md:p-8 border-b border-slate-100 bg-slate-50/50 flex items-center gap-4">
+                        <div
+                            class="w-12 h-12 bg-white rounded-full grid place-items-center text-2xl shadow-sm border border-slate-100 text-accent">
+                            🩺</div>
                         <div>
-                            <b>Visit / Call</b>
-                            <div class="muted small">Survey No.53, Sai Housing Society, Karve Nagar</div>
+                            <b class="block text-text text-lg">Visit / Call</b>
+                            <div class="text-text-muted text-sm">Survey No.53, Sai Housing Society, Karve Nagar</div>
                         </div>
                     </div>
 
-                    <div class="hero-card-mid">
-                        <div class="info-row">
-                            <span class="label">Phone</span>
-                            <span class="value">
-                                <a href="tel:+912025448451">020-25448451</a> •
-                                <a href="tel:+919823425152">9823425152</a>
+                    <div class="p-6 md:p-8 space-y-6">
+                        <div class="flex justify-between items-center pb-4 border-b border-dashed border-slate-200">
+                            <span class="text-text-muted text-sm font-medium uppercase tracking-wide">Phone</span>
+                            <span class="font-bold text-text text-lg">
+                                <a href="tel:+912025448451"
+                                    class="hover:text-primary transition-colors">020-25448451</a> •
+                                <a href="tel:+919823425152" class="hover:text-primary transition-colors">9823425152</a>
                             </span>
                         </div>
-                        <div class="info-row">
-                            <span class="label">Doctor timing (listed)</span>
-                            <span class="value">Mon–Sat: 9:30 AM – 6:30 PM</span>
+                        <div class="flex justify-between items-center">
+                            <span class="text-text-muted text-sm font-medium uppercase tracking-wide">Timing</span>
+                            <span class="font-bold text-text">Mon–Sat: 9:30 AM – 6:30 PM</span>
                         </div>
                     </div>
 
-                    <div class="hero-card-bottom">
-                        <a class="btn primary full" href="tel:+912025448451">Call for Appointment</a>
-                        <a class="btn ghost full" href="#appointment">Request a Callback</a>
+                    <div
+                        class="p-6 md:p-8 bg-gradient-to-b from-white to-slate-50 border-t border-slate-200 flex flex-col sm:flex-row gap-4">
+                        <a class="flex-1 inline-flex justify-center items-center px-6 py-3 bg-gradient-to-br from-primary to-primary-dark text-white font-bold rounded-xl shadow-lg shadow-primary/20 hover:-translate-y-0.5 transition-all duration-300"
+                            href="tel:+912025448451">Call for Appointment</a>
+                        <a class="flex-1 inline-flex justify-center items-center px-6 py-3 bg-white text-primary-dark font-bold rounded-xl border border-slate-200 hover:bg-slate-50 hover:border-primary hover:-translate-y-0.5 transition-all duration-300"
+                            href="#appointment">Request Callback</a>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- SERVICES -->
-        <section class="section" id="services">
-            <div class="container">
-                <h2>Services</h2>
-                <p class="muted">Core services shown on public listings (you can edit/expand anytime).</p>
+        <section class="py-16 md:py-24 bg-surface-alt" id="services">
+            <div class="container mx-auto px-4 max-w-7xl">
+                <h2 class="text-3xl md:text-4xl font-bold mb-3 text-text">Services</h2>
+                <p class="text-text-muted mb-12">Core services shown on public listings.</p>
 
-                <div class="grid3">
-                    <article class="card">
-                        <div class="card-icon" aria-hidden="true">👩‍⚕️</div>
-                        <h3>Gynecology & Women’s Health</h3>
-                        <p>Consultations, routine checkups and women’s wellness support.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Service Card -->
+                    <article
+                        class="bg-white p-8 rounded-3xl border border-slate-200 shadow-card hover:-translate-y-1 hover:shadow-xl hover:border-primary-light transition-all duration-300 group">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-primary-light/50 text-primary-dark grid place-items-center text-3xl mb-6 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                            👩‍⚕️</div>
+                        <h3 class="text-xl font-bold mb-3 text-text">Gynecology</h3>
+                        <p class="text-text-muted leading-relaxed">Consultations, routine checkups and women’s wellness
+                            support.</p>
                     </article>
 
-                    <article class="card">
-                        <div class="card-icon" aria-hidden="true">🦴</div>
-                        <h3>Orthopedic Care</h3>
-                        <p>Joint pain, injuries, mobility care and treatment guidance.</p>
+                    <article
+                        class="bg-white p-8 rounded-3xl border border-slate-200 shadow-card hover:-translate-y-1 hover:shadow-xl hover:border-primary-light transition-all duration-300 group">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-primary-light/50 text-primary-dark grid place-items-center text-3xl mb-6 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                            🦴</div>
+                        <h3 class="text-xl font-bold mb-3 text-text">Orthopedic Care</h3>
+                        <p class="text-text-muted leading-relaxed">Joint pain, injuries, mobility care and treatment
+                            guidance.</p>
                     </article>
 
-                    <article class="card">
-                        <div class="card-icon" aria-hidden="true">🧪</div>
-                        <h3>Blood Testing / Diagnostics</h3>
-                        <p>Basic tests, reports and next-step clinical guidance.</p>
+                    <article
+                        class="bg-white p-8 rounded-3xl border border-slate-200 shadow-card hover:-translate-y-1 hover:shadow-xl hover:border-primary-light transition-all duration-300 group">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-primary-light/50 text-primary-dark grid place-items-center text-3xl mb-6 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                            🧪</div>
+                        <h3 class="text-xl font-bold mb-3 text-text">Diagnostics</h3>
+                        <p class="text-text-muted leading-relaxed">Basic blood tests, reports analysis and next-step
+                            clinical guidance.</p>
                     </article>
 
-                    <article class="card">
-                        <div class="card-icon" aria-hidden="true">🩺</div>
-                        <h3>General Consultation</h3>
-                        <p>Fever, BP/diabetes, common illnesses and follow-up visits.</p>
+                    <article
+                        class="bg-white p-8 rounded-3xl border border-slate-200 shadow-card hover:-translate-y-1 hover:shadow-xl hover:border-primary-light transition-all duration-300 group">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-primary-light/50 text-primary-dark grid place-items-center text-3xl mb-6 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                            🩺</div>
+                        <h3 class="text-xl font-bold mb-3 text-text">General Consultation</h3>
+                        <p class="text-text-muted leading-relaxed">Fever, pressure/diabetes management, common illnesses
+                            and follow-ups.</p>
                     </article>
 
-                    <article class="card">
-                        <div class="card-icon" aria-hidden="true">🤰</div>
-                        <h3>Maternity Support</h3>
-                        <p>Pregnancy-related consultations and maternity care support.</p>
+                    <article
+                        class="bg-white p-8 rounded-3xl border border-slate-200 shadow-card hover:-translate-y-1 hover:shadow-xl hover:border-primary-light transition-all duration-300 group">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-primary-light/50 text-primary-dark grid place-items-center text-3xl mb-6 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                            🤰</div>
+                        <h3 class="text-xl font-bold mb-3 text-text">Maternity Support</h3>
+                        <p class="text-text-muted leading-relaxed">Pregnancy-related consultations and comprehensive
+                            maternity care.</p>
                     </article>
 
-                    <article class="card">
-                        <div class="card-icon" aria-hidden="true">📄</div>
-                        <h3>Reports & Second Opinion</h3>
-                        <p>Bring your reports for review and treatment planning advice.</p>
+                    <article
+                        class="bg-white p-8 rounded-3xl border border-slate-200 shadow-card hover:-translate-y-1 hover:shadow-xl hover:border-primary-light transition-all duration-300 group">
+                        <div
+                            class="w-14 h-14 rounded-2xl bg-primary-light/50 text-primary-dark grid place-items-center text-3xl mb-6 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                            📄</div>
+                        <h3 class="text-xl font-bold mb-3 text-text">Second Opinion</h3>
+                        <p class="text-text-muted leading-relaxed">Bring your existing reports for review and treatment
+                            planning advice.</p>
                     </article>
                 </div>
             </div>
         </section>
 
         <!-- DOCTORS -->
-        <section class="section" id="doctors">
-            <div class="container">
-                <h2>Doctors</h2>
-                <p class="muted">Public doctor listings found online. Add more doctors if you have details.</p>
+        <section class="py-16 md:py-24 bg-white" id="doctors">
+            <div class="container mx-auto px-4 max-w-7xl">
+                <h2 class="text-3xl md:text-4xl font-bold mb-3 text-text">Doctors</h2>
+                <p class="text-text-muted mb-12">Expert clinical team available at Khenat Hospital.</p>
 
-                <div class="grid2">
-                    <article class="card">
-                        <h3>Dr. Narendra Khenat</h3>
-                        <p class="muted">General Physician</p>
-                        <div class="mini">
-                            <div><b>Timing:</b> Mon–Sat: 9:30 AM – 6:30 PM</div>
-                            <div><b>Sunday:</b> Closed</div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <article
+                        class="bg-white p-8 rounded-3xl border border-slate-200 shadow-card flex flex-col justify-between h-full">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2 text-text">Dr. Narendra Khenat</h3>
+                            <p class="text-primary font-medium mb-4">General Physician</p>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-100 text-text-muted space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <b>Timing:</b> <span>Mon–Sat: 9:30 AM – 6:30 PM</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <b>Sunday:</b> <span>Closed</span>
+                            </div>
                         </div>
                     </article>
 
-                    <article class="card">
-                        <h3>Specialty Clinics</h3>
-                        <p class="muted">Gynecology • Orthopedics • Diagnostics</p>
-                        <div class="mini">
-                            <div>For availability, please call the hospital.</div>
-                            <div><b>Phone:</b> <a href="tel:+912025448451">020-25448451</a></div>
+                    <article
+                        class="bg-white p-8 rounded-3xl border border-slate-200 shadow-card flex flex-col justify-between h-full">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2 text-text">Specialty Clinics</h3>
+                            <p class="text-text-muted mb-4">Gynecology • Orthopedics • Diagnostics</p>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-slate-100 text-text-muted space-y-2 text-sm">
+                            <div>For specialist availability, please verify by phone.</div>
+                            <div class="flex items-center gap-2">
+                                <b>Phone:</b> <a href="tel:+912025448451"
+                                    class="text-primary font-bold hover:underline">020-25448451</a>
+                            </div>
                         </div>
                     </article>
                 </div>
@@ -196,28 +380,32 @@
         </section>
 
         <!-- APPOINTMENT -->
-        <section class="section" id="appointment">
-            <div class="container split">
+        <section class="py-16 md:py-24 bg-surface-alt" id="appointment">
+            <div class="container mx-auto px-4 max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                 <div>
-                    <h2>Request an Appointment</h2>
-                    <p class="muted">Fill this form and it will open a call/email draft.</p>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-3 text-text">Request an Appointment</h2>
+                    <p class="text-text-muted mb-8">Fill this form and it will open a call/email draft for you.</p>
 
-                    <form class="form card" onsubmit="handleAppointment(event)">
-                        <div class="row">
-                            <div>
-                                <label>Full Name</label>
-                                <input name="name" required placeholder="Patient name" />
+                    <form class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 shadow-card space-y-6"
+                        onsubmit="handleAppointment(event)">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="block text-sm font-bold text-text">Full Name</label>
+                                <input name="name" required placeholder="Patient name"
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-primary focus:ring-4 focus:ring-primary-light/50 outline-none transition-all" />
                             </div>
-                            <div>
-                                <label>Phone</label>
-                                <input name="phone" required placeholder="10-digit mobile" />
+                            <div class="space-y-2">
+                                <label class="block text-sm font-bold text-text">Phone</label>
+                                <input name="phone" required placeholder="10-digit mobile"
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-primary focus:ring-4 focus:ring-primary-light/50 outline-none transition-all" />
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div>
-                                <label>Department</label>
-                                <select name="dept">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="block text-sm font-bold text-text">Department</label>
+                                <select name="dept"
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-primary focus:ring-4 focus:ring-primary-light/50 outline-none transition-all bg-white">
                                     <option value="General Consultation">General Consultation</option>
                                     <option value="Gynecology">Gynecology</option>
                                     <option value="Orthopedics">Orthopedics</option>
@@ -225,97 +413,131 @@
                                     <option value="Maternity Support">Maternity Support</option>
                                 </select>
                             </div>
-                            <div>
-                                <label>Preferred Date</label>
-                                <input type="date" name="date" />
+                            <div class="space-y-2">
+                                <label class="block text-sm font-bold text-text">Preferred Date</label>
+                                <input type="date" name="date"
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-primary focus:ring-4 focus:ring-primary-light/50 outline-none transition-all" />
                             </div>
                         </div>
 
-                        <label>Message (optional)</label>
-                        <textarea name="message" placeholder="Symptoms / reason for visit"></textarea>
+                        <div class="space-y-2">
+                            <label class="block text-sm font-bold text-text">Message (Optional)</label>
+                            <textarea name="message" placeholder="Symptoms / reason for visit"
+                                class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-primary focus:ring-4 focus:ring-primary-light/50 outline-none transition-all min-h-[120px]"></textarea>
+                        </div>
 
-                        <button class="btn primary" type="submit">Send Request</button>
-                        <p class="muted small">Or call directly: <a href="tel:+912025448451">020-25448451</a></p>
+                        <button
+                            class="w-full py-4 bg-gradient-to-br from-primary to-primary-dark text-white font-bold rounded-xl shadow-lg shadow-primary/20 hover:-translate-y-0.5 hover:shadow-primary/30 transition-all duration-300"
+                            type="submit">Send Appointment Request</button>
+                        <p class="text-center text-sm text-text-muted">Or call directly: <a href="tel:+912025448451"
+                                class="font-bold text-primary hover:underline">020-25448451</a></p>
                     </form>
                 </div>
 
-                <div class="card">
-                    <h3>Quick Contact</h3>
-                    <div class="info">
-                        <div class="info-item">
-                            <span class="label">Call</span>
-                            <span class="value"><a href="tel:+912025448451">020-25448451</a></span>
+                <div class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200 shadow-card">
+                    <h3 class="text-2xl font-bold mb-6 text-text">Quick Contact</h3>
+                    <div class="space-y-4">
+                        <div
+                            class="flex items-center justify-between p-4 bg-surface-alt rounded-2xl border border-slate-100">
+                            <span class="text-xs font-bold uppercase tracking-wider text-primary">Call</span>
+                            <a href="tel:+912025448451"
+                                class="font-bold text-text text-lg hover:text-primary transition-colors">020-25448451</a>
                         </div>
-                        <div class="info-item">
-                            <span class="label">Mobile</span>
-                            <span class="value"><a href="tel:+919823425152">9823425152</a></span>
+                        <div
+                            class="flex items-center justify-between p-4 bg-surface-alt rounded-2xl border border-slate-100">
+                            <span class="text-xs font-bold uppercase tracking-wider text-primary">Mobile</span>
+                            <a href="tel:+919823425152"
+                                class="font-bold text-text text-lg hover:text-primary transition-colors">9823425152</a>
                         </div>
-                        <div class="info-item">
-                            <span class="label">Address</span>
-                            <span class="value">Survey No.53, Sai Housing Society, Karve Nagar Rd, State Bank Nagar,
-                                Sramik Vasahat, Karvenagar, Pune, MH 411052</span>
+                        <div class="p-4 bg-surface-alt rounded-2xl border border-slate-100 space-y-2">
+                            <span class="text-xs font-bold uppercase tracking-wider text-primary block">Address</span>
+                            <span class="block text-text leading-relaxed">Survey No.53, Sai Housing Society, Karve Nagar
+                                Rd, State Bank Nagar, Sramik Vasahat, Karvenagar, Pune, MH 411052</span>
                         </div>
                     </div>
 
-                    <div class="social">
-                        <div class="social-links">
-                            <a class="btn ghost social-btn" href="#" onclick="return false;">WhatsApp</a>
-                            <a class="btn ghost social-btn" href="#" onclick="return false;">Facebook</a>
-                            <a class="btn ghost social-btn" href="#" onclick="return false;">Instagram</a>
+                    <div class="mt-8 space-y-4">
+                        <div class="grid grid-cols-3 gap-2">
+                            <button
+                                class="bg-white border border-slate-200 text-text-muted py-2 rounded-lg text-sm font-semibold hover:bg-slate-50 hover:text-primary transition-all">WhatsApp</button>
+                            <button
+                                class="bg-white border border-slate-200 text-text-muted py-2 rounded-lg text-sm font-semibold hover:bg-slate-50 hover:text-primary transition-all">Facebook</button>
+                            <button
+                                class="bg-white border border-slate-200 text-text-muted py-2 rounded-lg text-sm font-semibold hover:bg-slate-50 hover:text-primary transition-all">Instagram</button>
                         </div>
-                        <a class="btn ghost full" href="https://maps.app.goo.gl/Nfqf4wJDwEgNczU47" target="_blank">Open
-                            Map
-                            Location</a>
+                        <a class="flex justify-center items-center w-full py-3.5 bg-white text-primary-dark font-bold rounded-xl border border-slate-200 hover:bg-slate-50 hover:border-primary transition-all duration-300"
+                            href="https://maps.app.goo.gl/Nfqf4wJDwEgNczU47" target="_blank">Open Map Location</a>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- CONTACT + MAP -->
-        <section class="section" id="contact">
-            <div class="container">
-                <h2>Contact & Directions</h2>
-                <p class="muted">Tap the map for directions.</p>
+        <section class="py-16 md:py-24 bg-white" id="contact">
+            <div class="container mx-auto px-4 max-w-7xl">
+                <h2 class="text-3xl md:text-4xl font-bold mb-3 text-text">Directions</h2>
+                <p class="text-text-muted mb-8">Tap the map to open navigation.</p>
 
-                <div class="map card" id="map" aria-label="Google Map">
-                    <!-- Using the existing iframe for visual, but the link above is the key -->
+                <div class="rounded-3xl overflow-hidden shadow-lg border border-slate-200 h-[400px]">
                     <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                        src="https://www.google.com/maps?q=18.490800,73.818900&z=17&output=embed">
+                        src="https://www.google.com/maps?q=18.490800,73.818900&z=17&output=embed"
+                        class="w-full h-full border-0">
                     </iframe>
                 </div>
 
-                <div class="footbar">
-                    <div class="muted small">© <span id="year"></span> Khenat Hospital</div>
-                    <div class="muted small">Karvenagar, Pune • 411052</div>
+                <div
+                    class="mt-12 pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center text-text-muted text-sm gap-4">
+                    <div>© <span id="year"></span> Khenat Hospital</div>
+                    <div>Karvenagar, Pune • 411052</div>
                 </div>
             </div>
         </section>
     </main>
 
     <!-- CHATBOT UI -->
-    <div class="chat-fab" onclick="toggleChat()" aria-label="Open Chat">
+    <div class="fixed bottom-6 right-6 w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-full text-white text-3xl grid place-items-center cursor-pointer shadow-xl shadow-blue-500/30 z-50 hover:scale-110 transition-transform duration-300 animate-bounce"
+        onclick="toggleChat()" aria-label="Open Chat">
         💬
     </div>
 
-    <div class="chat-window" id="chat-window">
-        <div class="chat-header">
-            <div class="chat-title">
-                <div class="dot active"></div>
-                <b>Khenat Assistant</b>
+    <div class="fixed bottom-24 right-6 w-full max-w-[350px] h-[500px] bg-white rounded-3xl shadow-2xl border border-slate-200 flex flex-col z-50 transition-all duration-500 translate-y-10 opacity-0 pointer-events-none overflow-hidden"
+        id="chat-window">
+        <!-- Chat Header -->
+        <div class="p-4 bg-gradient-to-r from-primary to-primary-dark text-white flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-2.5 h-2.5 bg-green-400 rounded-full shadow ring-2 ring-white/20"></div>
+                <b class="font-bold">Khenat Assistant</b>
             </div>
-            <button class="chat-close" onclick="toggleChat()">×</button>
+            <button class="text-white/80 hover:text-white text-2xl" onclick="toggleChat()">×</button>
         </div>
-        <div class="chat-messages" id="chat-messages">
-            <!-- Messages will appear here -->
+
+        <!-- Messages -->
+        <div class="flex-1 p-4 overflow-y-auto flex flex-col gap-3 bg-slate-50" id="chat-messages">
+            <!-- Messages injected by JS -->
         </div>
-        <div class="chat-input-area">
-            <input type="text" id="chat-input" placeholder="Type a message..." />
-            <button id="chat-send">➤</button>
+
+        <!-- Input -->
+        <div class="p-4 bg-white border-t border-slate-100 flex gap-2">
+            <input type="text" id="chat-input" placeholder="Type a message..."
+                class="flex-1 px-4 py-2 rounded-full border border-slate-200 focus:border-primary focus:ring-2 focus:ring-primary-light/50 outline-none text-sm" />
+            <button id="chat-send"
+                class="w-10 h-10 bg-primary text-white rounded-full grid place-items-center hover:bg-primary-dark transition-colors">➤</button>
         </div>
     </div>
 
     <script>
         document.getElementById("year").textContent = new Date().getFullYear();
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+
+            // Add animation class if opening
+            if (menu.classList.contains('flex')) {
+                menu.classList.add('animate-slide-down');
+            }
+        }
     </script>
     <script src="main.js"></script>
     <script src="chat.js"></script>
