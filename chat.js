@@ -57,7 +57,13 @@ function toggleChat() {
 function addMessage(text, sender = 'bot') {
     const container = document.getElementById('chat-messages');
     const msgDiv = document.createElement('div');
-    msgDiv.className = `message ${sender}`;
+
+    // Tailwind Classes for Messages
+    const baseClasses = "max-w-[85%] px-4 py-3 rounded-2xl text-sm leading-relaxed shadow-sm animate-[fadeIn_0.3s_ease] mb-1";
+    const botClasses = "bg-white border border-slate-200 text-text rounded-bl-none self-start mr-auto";
+    const userClasses = "bg-primary text-white rounded-br-none self-end ml-auto";
+
+    msgDiv.className = `${baseClasses} ${sender === 'bot' ? botClasses : userClasses}`;
     msgDiv.innerText = text;
     container.appendChild(msgDiv);
     container.scrollTop = container.scrollHeight;
@@ -66,11 +72,12 @@ function addMessage(text, sender = 'bot') {
 function addOptions(options) {
     const container = document.getElementById('chat-messages');
     const optionsDiv = document.createElement('div');
-    optionsDiv.className = 'options-container';
+    optionsDiv.className = 'flex flex-wrap gap-2 mt-2 mb-2 w-full options-container'; // Tailwind for options container
 
     options.forEach(opt => {
         const btn = document.createElement('button');
-        btn.className = 'chat-option-btn';
+        // Tailwind for option buttons
+        btn.className = 'px-4 py-2 bg-white border border-primary text-primary text-xs font-bold rounded-full hover:bg-primary-light transition-colors';
         btn.innerText = opt;
         btn.onclick = () => handleUserResponse(opt);
         optionsDiv.appendChild(btn);
@@ -83,9 +90,9 @@ function addOptions(options) {
 function showTyping() {
     const container = document.getElementById('chat-messages');
     const typingDiv = document.createElement('div');
-    typingDiv.className = 'message bot typing';
+    typingDiv.className = 'max-w-[85%] px-4 py-3 rounded-2xl rounded-bl-none bg-white border border-slate-200 self-start text-text-muted text-xs font-bold tracking-widest typing mr-auto mb-1'; // Tailwind
     typingDiv.id = 'typing-indicator';
-    typingDiv.innerHTML = '<span>.</span><span>.</span><span>.</span>';
+    typingDiv.innerHTML = '<span class="animate-pulse">.</span><span class="animate-pulse delay-75">.</span><span class="animate-pulse delay-150">.</span>';
     container.appendChild(typingDiv);
     container.scrollTop = container.scrollHeight;
 }
